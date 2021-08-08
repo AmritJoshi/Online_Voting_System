@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 18, 2018 at 07:34 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.1.15
+-- Host: localhost:3306
+-- Generation Time: Aug 08, 2021 at 03:23 PM
+-- Server version: 8.0.26-0ubuntu0.20.04.2
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
   `firstname` varchar(50) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `created_on`) VALUES
-(1, 'nurhodelta', '$2y$10$fLK8s7ZDnM.1lE7XMP.J6OuPbQ.DPUVKBo7rENnQY7gYq0xAzsKJy', 'Neovic', 'Devierte', 'facebook-profile-image.jpeg', '2018-04-02');
+(181, 'KIngaj', '123456', 'Amrit', 'Joshi', '', '2021-08-08');
 
 -- --------------------------------------------------------
 
@@ -52,13 +52,22 @@ INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `pho
 --
 
 CREATE TABLE `candidates` (
-  `id` int(11) NOT NULL,
-  `position_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `position_id` int NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
   `photo` varchar(150) NOT NULL,
   `platform` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `candidates`
+--
+
+INSERT INTO `candidates` (`id`, `position_id`, `firstname`, `lastname`, `photo`, `platform`) VALUES
+(18, 8, 'Ajay', 'malhotra', 'logo.png', ''),
+(19, 8, 'Aka', 'sda', '', ''),
+(21, 9, 'nan', 'jos', '', '');
 
 -- --------------------------------------------------------
 
@@ -67,11 +76,36 @@ CREATE TABLE `candidates` (
 --
 
 CREATE TABLE `positions` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `description` varchar(50) NOT NULL,
-  `max_vote` int(11) NOT NULL,
-  `priority` int(11) NOT NULL
+  `max_vote` int NOT NULL,
+  `priority` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `positions`
+--
+
+INSERT INTO `positions` (`id`, `description`, `max_vote`, `priority`) VALUES
+(8, 'Bouncer', 10000, 1),
+(9, 'PMO', 100000, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tat`
+--
+
+CREATE TABLE `tat` (
+  `name` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tat`
+--
+
+INSERT INTO `tat` (`name`) VALUES
+('Amrit');
 
 -- --------------------------------------------------------
 
@@ -80,13 +114,20 @@ CREATE TABLE `positions` (
 --
 
 CREATE TABLE `voters` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `voters_id` varchar(15) NOT NULL,
   `password` varchar(60) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
   `photo` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `voters`
+--
+
+INSERT INTO `voters` (`id`, `voters_id`, `password`, `firstname`, `lastname`, `photo`) VALUES
+(11, '101', '123', 'Amrit', 'Joshi', '');
 
 -- --------------------------------------------------------
 
@@ -95,11 +136,18 @@ CREATE TABLE `voters` (
 --
 
 CREATE TABLE `votes` (
-  `id` int(11) NOT NULL,
-  `voters_id` int(11) NOT NULL,
-  `candidate_id` int(11) NOT NULL,
-  `position_id` int(11) NOT NULL
+  `id` int NOT NULL,
+  `voters_id` int NOT NULL,
+  `candidate_id` int NOT NULL,
+  `position_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`id`, `voters_id`, `candidate_id`, `position_id`) VALUES
+(81, 11, 18, 8);
 
 --
 -- Indexes for dumped tables
@@ -143,31 +191,31 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT for table `candidates`
 --
 ALTER TABLE `candidates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `voters`
 --
 ALTER TABLE `voters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
